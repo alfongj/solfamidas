@@ -12,9 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import es.solfamidas.elmundo.R;
-import es.solfamidas.elmundo.framework.BaseToolBarActivity;
-import es.solfamidas.elmundo.main.datasource.MainDatasource;
-import es.solfamidas.elmundo.main.datasource.MainDatasourceImpl;
+import es.solfamidas.elmundo.common.framework.BaseToolBarActivity;
 import es.solfamidas.elmundo.main.presenter.MainPresenter;
 import es.solfamidas.elmundo.main.presenter.MainPresenterImpl;
 import es.solfamidas.elmundo.main.ui.fragments.TestFragment;
@@ -32,16 +30,10 @@ public class MainActivity
     private MainPresenter mPresenter;
 
 
-
     @Override
     public void injectModuleDependencies() {
-        MainDatasource mainDatasource = new MainDatasourceImpl();
-        mPresenter = new MainPresenterImpl(
-                mainDatasource,
-                this
-        );
+        mPresenter = new MainPresenterImpl(this);
     }
-
 
 
     @Override

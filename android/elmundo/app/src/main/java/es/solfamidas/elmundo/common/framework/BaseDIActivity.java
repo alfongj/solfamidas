@@ -1,4 +1,4 @@
-package es.solfamidas.elmundo.framework;
+package es.solfamidas.elmundo.common.framework;
 
 /**
  * Activity which will act as a dependency injector for other classes.
