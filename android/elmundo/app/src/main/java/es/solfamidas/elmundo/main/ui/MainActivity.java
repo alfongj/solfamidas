@@ -1,4 +1,4 @@
-package es.solfamidas.elmundo;
+package es.solfamidas.elmundo.main.ui;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -11,36 +11,53 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import es.solfamidas.elmundo.R;
+import es.solfamidas.elmundo.framework.BaseToolBarActivity;
+import es.solfamidas.elmundo.main.datasource.MainDatasource;
+import es.solfamidas.elmundo.main.datasource.MainDatasourceImpl;
+import es.solfamidas.elmundo.main.presenter.MainPresenter;
+import es.solfamidas.elmundo.main.presenter.MainPresenterImpl;
+import es.solfamidas.elmundo.main.ui.fragments.TestFragment;
+
 import static android.view.View.OnClickListener;
 
 
-public class MainActivity extends BaseToolBarActivity {
+public class MainActivity
+        extends BaseToolBarActivity
+        implements MainUi {
 
-    private DrawerLayout drawer;
+    private DrawerLayout mDrawer;
+
+    // Injected vars
+    private MainPresenter mPresenter;
+
+
+
+    @Override
+    public void injectModuleDependencies() {
+        MainDatasource mainDatasource = new MainDatasourceImpl();
+        mPresenter = new MainPresenterImpl(
+                mainDatasource,
+                this
+        );
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        //drawer
         setupDrawer();
-
-
-        //toolbar
         setupToolBar();
-
 
         getFragmentManager().beginTransaction()
                 .add(R.id.container, new TestFragment())
                 .commit();
-
-
     }
 
     private void setupDrawer() {
-        drawer = (DrawerLayout) findViewById(R.id.drawer);
-        drawer.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer);
+        mDrawer.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
         ListView drawerList = (ListView) findViewById(R.id.left_drawer_listview);
 
         // Set the adapter for the list view
@@ -48,8 +65,6 @@ public class MainActivity extends BaseToolBarActivity {
 
         // Set the list's click listener
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-
     }
 
     private void setupToolBar() {
@@ -58,7 +73,7 @@ public class MainActivity extends BaseToolBarActivity {
 
             @Override
             public void onClick(View view) {
-                drawer.openDrawer(Gravity.LEFT);
+                mDrawer.openDrawer(Gravity.LEFT);
             }
         });
     }
@@ -71,7 +86,7 @@ public class MainActivity extends BaseToolBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -98,21 +113,15 @@ public class MainActivity extends BaseToolBarActivity {
 
             switch (position) {
                 case 0:
-
                     transaction.replace(R.id.container, new TestFragment());
                     break;
                 case 1:
-
                     transaction.replace(R.id.container, new TestFragment());
                     break;
             }
-
             transaction.addToBackStack(null);
-
             transaction.commit();
-
-            drawer.closeDrawer(Gravity.LEFT);
-
+            mDrawer.closeDrawer(Gravity.LEFT);
         }
     }
 }

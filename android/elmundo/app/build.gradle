@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.0.1"
 
     defaultConfig {
-        applicationId "carlos.munoz.sports"
+        applicationId "es.solfamidas.elmundo"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1
