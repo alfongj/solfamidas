@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-
 import static android.view.View.OnClickListener;
 
 
@@ -53,7 +52,7 @@ public class MainActivity extends BaseToolBarActivity {
 
     }
 
-    private void setupToolBar(){
+    private void setupToolBar() {
         setActionBarIcon(R.drawable.ic_ab_drawer);
         setActionBarNavigationClickListener(new OnClickListener() {
 

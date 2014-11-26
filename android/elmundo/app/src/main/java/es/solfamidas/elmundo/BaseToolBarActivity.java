@@ -5,7 +5,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import es.solfamidas.elmundo.R;
 
 public abstract class BaseToolBarActivity extends ActionBarActivity {
 
