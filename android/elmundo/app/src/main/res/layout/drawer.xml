@@ -1,0 +1,21 @@
+<!-- Drawer -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/left_drawer"
+    android:orientation="vertical"
+    android:layout_width="260dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="@color/windowBackgroundColor">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:id="@+id/left_drawer_image"
+        android:layout_height="wrap_content"
+        android:padding="50dp"
+        android:src="@drawable/ic_launcher" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/left_drawer_listview"
+        android:layout_height="match_parent"></ListView>
+</LinearLayout>
