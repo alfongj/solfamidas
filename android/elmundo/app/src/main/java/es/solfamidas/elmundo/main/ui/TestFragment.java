@@ -1,10 +1,12 @@
-package es.solfamidas.elmundo;
+package es.solfamidas.elmundo.main.ui;
 
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import es.solfamidas.elmundo.R;
 
 /**
  * Created by carlos on 15/11/14.
