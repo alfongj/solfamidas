@@ -12,7 +12,7 @@ public abstract class BaseToolBarActivity
         extends ActionBarActivity
         implements BaseDIActivity {
 
-    private Toolbar toolbar;
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +22,9 @@ public abstract class BaseToolBarActivity
 
         setContentView(getLayoutResource());
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
@@ -36,10 +36,10 @@ public abstract class BaseToolBarActivity
     protected abstract int getLayoutResource();
 
     protected void setActionBarIcon(int iconRes) {
-        toolbar.setNavigationIcon(iconRes);
+        mToolbar.setNavigationIcon(iconRes);
     }
 
     protected void setActionBarNavigationClickListener(View.OnClickListener cl) {
-        toolbar.setNavigationOnClickListener(cl);
+        mToolbar.setNavigationOnClickListener(cl);
     }
 }

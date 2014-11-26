@@ -13,18 +13,36 @@ import android.widget.ListView;
 
 import es.solfamidas.elmundo.R;
 import es.solfamidas.elmundo.framework.BaseToolBarActivity;
+import es.solfamidas.elmundo.main.datasource.MainDatasource;
+import es.solfamidas.elmundo.main.datasource.MainDatasourceImpl;
+import es.solfamidas.elmundo.main.presenter.MainPresenter;
+import es.solfamidas.elmundo.main.presenter.MainPresenterImpl;
+import es.solfamidas.elmundo.main.ui.fragments.TestFragment;
 
 import static android.view.View.OnClickListener;
 
 
-public class MainActivity extends BaseToolBarActivity {
+public class MainActivity
+        extends BaseToolBarActivity
+        implements MainUi {
 
     private DrawerLayout mDrawer;
 
+    // Injected vars
+    private MainPresenter mPresenter;
+
+
+
     @Override
     public void injectModuleDependencies() {
-        // TODO
+        MainDatasource mainDatasource = new MainDatasourceImpl();
+        mPresenter = new MainPresenterImpl(
+                mainDatasource,
+                this
+        );
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

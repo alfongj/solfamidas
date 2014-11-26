@@ -1,4 +1,4 @@
-package es.solfamidas.elmundo.main.ui;
+package es.solfamidas.elmundo.main.ui.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
