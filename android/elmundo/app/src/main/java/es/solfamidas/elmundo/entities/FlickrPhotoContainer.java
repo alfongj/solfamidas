@@ -5,7 +5,7 @@ import com.google.gson.annotations.Expose;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Photos {
+public class FlickrPhotoContainer {
 
     @Expose
     private Integer page;
@@ -16,7 +16,7 @@ public class Photos {
     @Expose
     private String total;
     @Expose
-    private List<Photo> photo = new ArrayList<Photo>();
+    private List<FlickrPhoto> photo = new ArrayList<FlickrPhoto>();
 
     /**
      * @return The page
@@ -77,15 +77,15 @@ public class Photos {
     /**
      * @return The photo
      */
-    public List<Photo> getPhoto() {
+    public List<FlickrPhoto> getPhoto() {
         return photo;
     }
 
     /**
-     * @param photo The photo
+     * @param flickrPhoto The photo
      */
-    public void setPhoto(List<Photo> photo) {
-        this.photo = photo;
+    public void setPhoto(List<FlickrPhoto> flickrPhoto) {
+        this.photo = flickrPhoto;
     }
 
 }

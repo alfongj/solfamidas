@@ -5,21 +5,21 @@ import com.google.gson.annotations.Expose;
 public class FlickrResult {
 
     @Expose
-    private Photos photos;
+    private FlickrPhotoContainer photos;
     @Expose
     private String stat;
 
     /**
      * @return The photos
      */
-    public Photos getPhotos() {
+    public FlickrPhotoContainer getPhotos() {
         return photos;
     }
 
     /**
      * @param photos The photos
      */
-    public void setPhotos(Photos photos) {
+    public void setPhotos(FlickrPhotoContainer photos) {
         this.photos = photos;
     }
 

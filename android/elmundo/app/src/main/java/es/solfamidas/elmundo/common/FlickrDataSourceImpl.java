@@ -15,9 +15,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.util.ArrayList;
 
+import es.solfamidas.elmundo.entities.FlickrPhoto;
+import es.solfamidas.elmundo.entities.FlickrPhotoContainer;
 import es.solfamidas.elmundo.entities.FlickrResult;
-import es.solfamidas.elmundo.entities.Photo;
-import es.solfamidas.elmundo.entities.Photos;
 
 
 public class FlickrDataSourceImpl implements FlickrDataSource {
@@ -127,9 +127,9 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
     private ArrayList<String> generateFlickrPhotoUrls(FlickrResult f) {
 
         ArrayList<String> photoUrls = new ArrayList<String>();
-        Photos photos = f.getPhotos();
+        FlickrPhotoContainer photos = f.getPhotos();
 
-        for (Photo photo : photos.getPhoto()) {
+        for (FlickrPhoto photo : photos.getPhoto()) {
 
             StringBuilder sb = new StringBuilder();
             sb.append("https://farm");

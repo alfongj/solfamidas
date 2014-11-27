@@ -2,7 +2,7 @@ package es.solfamidas.elmundo.entities;
 
 import com.google.gson.annotations.Expose;
 
-public class Photo {
+public class FlickrPhoto {
 
     @Expose
     private String id;
