@@ -26,7 +26,7 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
     private final String HANDLER_PARAMETER_ERROR = "error";
 
     @Override
-    public void getFlickrImagesByTag(final String tag, final int numberOfPhotos, final FlickrCallback callback) {
+    public void getFlickrImagesByTag(final String tag, final int numberOfPhotos, final ImagesByTagCallback callback) {
 
         Thread background = new Thread(new Runnable() {
 
@@ -84,10 +84,10 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
 
                     if (error.isEmpty()) {
                         //TODO send result info to presenter
-                        callback.flickrSuccess(urls);
+                        callback.onSuccess(urls);
                     } else {
                         //TODO send error to presenter
-                        callback.flickrError(error);
+                        callback.onError(error);
                     }
                 }
             };

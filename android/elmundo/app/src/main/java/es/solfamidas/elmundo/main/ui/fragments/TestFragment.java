@@ -35,16 +35,15 @@ public class TestFragment extends Fragment {
 
         //TODO test, delete
         FlickrDataSourceImpl f = new FlickrDataSourceImpl();
-        f.getFlickrImagesByTag("cristiano ronaldo", 100, new FlickrDataSource.FlickrCallback() {
+        f.getFlickrImagesByTag("cristiano ronaldo", 100, new FlickrDataSource.ImagesByTagCallback() {
             @Override
-            public void flickrSuccess(ArrayList<String> imageUrls) {
+            public void onSuccess(ArrayList<String> imageUrls) {
                 mGridView.setAdapter(new FlickrAdapter(getActivity(), imageUrls));
             }
 
             @Override
-            public void flickrError(String errorMsg) {
+            public void onError(String errorMsg) {
                 Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_SHORT).show();
-
             }
         });
 

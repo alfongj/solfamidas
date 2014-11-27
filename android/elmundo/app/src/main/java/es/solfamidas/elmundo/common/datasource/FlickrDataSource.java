@@ -11,13 +11,13 @@ public interface FlickrDataSource {
      * @param numberOfPhotos number of photo urls to return. Max value 500.
      * @param callback       result event.
      */
-    public void getFlickrImagesByTag(String tag, int numberOfPhotos, FlickrCallback callback);
+    public void getFlickrImagesByTag(String tag, int numberOfPhotos, ImagesByTagCallback callback);
 
-    public interface FlickrCallback {
+    public interface ImagesByTagCallback {
 
-        public void flickrSuccess(ArrayList<String> imageUrls);
+        public void onSuccess(ArrayList<String> imageUrls);
 
-        public void flickrError(String errorMsg);
+        public void onError(String errorMsg);
 
     }
 }
