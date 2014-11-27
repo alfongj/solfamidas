@@ -9,12 +9,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import es.solfamidas.elmundo.R;
+import es.solfamidas.elmundo.common.datasource.FlickrDataSource;
+import es.solfamidas.elmundo.common.datasource.FlickrDataSourceImpl;
 
 public class TestFragment extends Fragment {
 
@@ -30,20 +33,24 @@ public class TestFragment extends Fragment {
 
         setRetainInstance(true);
 
-        //TODO test image urls
-        ArrayList<String> testImageUrls = new ArrayList<String>();
-        testImageUrls.add("https://farm4.staticflickr.com/3617/3522372425_71e3dcc4a9_m.jpg");
-        testImageUrls.add("https://farm4.staticflickr.com/3617/3522372425_71e3dcc4a9_m.jpg");
-        testImageUrls.add("https://farm4.staticflickr.com/3617/3522372425_71e3dcc4a9_m.jpg");
-        testImageUrls.add("https://farm4.staticflickr.com/3617/3522372425_71e3dcc4a9_m.jpg");
-        testImageUrls.add("https://farm4.staticflickr.com/3617/3522372425_71e3dcc4a9_m.jpg");
-        testImageUrls.add("https://farm4.staticflickr.com/3617/3522372425_71e3dcc4a9_m.jpg");
-        testImageUrls.add("https://farm4.staticflickr.com/3617/3522372425_71e3dcc4a9_m.jpg");
+        //TODO test, delete
+        FlickrDataSourceImpl f = new FlickrDataSourceImpl();
+        f.getFlickrImagesByTag("cristiano ronaldo", 100, new FlickrDataSource.FlickrCallback() {
+            @Override
+            public void flickrSuccess(ArrayList<String> imageUrls) {
+                mGridView.setAdapter(new FlickrAdapter(getActivity(), imageUrls));
+            }
+
+            @Override
+            public void flickrError(String errorMsg) {
+                Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
         if (mRootView == null) {
             mRootView = inflater.inflate(R.layout.fragment_prueba, container, false);
             mGridView = (GridView) mRootView.findViewById(R.id.gridview);
-            mGridView.setAdapter(new FlickrAdapter(getActivity(), testImageUrls));
         }
         return mRootView;
     }
@@ -80,7 +87,7 @@ public class TestFragment extends Fragment {
                 imageView = (ImageView) convertView;
             }
 
-            Picasso.with(mContext).load(mData.get(position)).into(imageView);
+            Picasso.with(mContext).load(mData.get(position)).resize(100, 100).centerCrop().into(imageView);
 
             return imageView;
         }

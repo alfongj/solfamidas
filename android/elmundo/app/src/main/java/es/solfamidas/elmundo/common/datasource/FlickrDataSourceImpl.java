@@ -1,4 +1,4 @@
-package es.solfamidas.elmundo.common;
+package es.solfamidas.elmundo.common.datasource;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,7 +19,6 @@ import es.solfamidas.elmundo.entities.FlickrPhoto;
 import es.solfamidas.elmundo.entities.FlickrPhotoContainer;
 import es.solfamidas.elmundo.entities.FlickrResult;
 
-
 public class FlickrDataSourceImpl implements FlickrDataSource {
 
 
@@ -27,7 +26,7 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
     private final String HANDLER_PARAMETER_ERROR = "error";
 
     @Override
-    public void getFlickrImagesByTag(final String tag) {
+    public void getFlickrImagesByTag(final String tag, final int numberOfPhotos, final FlickrCallback callback) {
 
         Thread background = new Thread(new Runnable() {
 
@@ -37,7 +36,7 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
                 try {
                     Gson gson = new Gson();
                     String responseString;
-                    HttpGet httpget = new HttpGet(buildRequestUrl(tag));
+                    HttpGet httpget = new HttpGet(buildRequestUrl(tag, numberOfPhotos));
                     ResponseHandler<String> responseHandler = new BasicResponseHandler();
                     responseString = client.execute(httpget, responseHandler);
 
@@ -76,7 +75,6 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
                 handler.sendMessage(msgObj);
             }
 
-            // Define the Handler that receives messages from the thread and update the progress
             private final Handler handler = new Handler() {
 
                 public void handleMessage(Message msg) {
@@ -84,10 +82,12 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
                     String error = msg.getData().getString(HANDLER_PARAMETER_ERROR, "");
                     ArrayList<String> urls = msg.getData().getStringArrayList(HANDLER_PARAMETER_URLS);
 
-                    if (error != null) {
+                    if (error.isEmpty()) {
                         //TODO send result info to presenter
+                        callback.flickrSuccess(urls);
                     } else {
                         //TODO send error to presenter
+                        callback.flickrError(error);
                     }
                 }
             };
@@ -102,7 +102,7 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
      * @param tag text to search in flickr
      * @return request url
      */
-    private String buildRequestUrl(String tag){
+    private String buildRequestUrl(String tag, int numberOfPhotos) {
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("https")
                 .authority("api.flickr.com")
@@ -111,6 +111,7 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
                 .appendQueryParameter("method", "flickr.photos.search")
                 .appendQueryParameter("api_key", "a84ba44f36d47381be62bdec75c968b1")
                 .appendQueryParameter("text", tag)
+                .appendQueryParameter("per_page", "" + numberOfPhotos)
                 .appendQueryParameter("sort", "interestingness-desc")
                 .appendQueryParameter("format", "json")
                 .appendQueryParameter("nojsoncallback", "1");
@@ -149,4 +150,6 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
 
         return photoUrls;
     }
+
+
 }
