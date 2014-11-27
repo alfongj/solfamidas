@@ -1,5 +1,6 @@
 package es.solfamidas.elmundo.common;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,9 +19,7 @@ import es.solfamidas.elmundo.entities.FlickrResult;
 import es.solfamidas.elmundo.entities.Photo;
 import es.solfamidas.elmundo.entities.Photos;
 
-/**
- * Created by carlos on 26/11/14.
- */
+
 public class FlickrDataSourceImpl implements FlickrDataSource {
 
 
@@ -30,8 +29,6 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
     @Override
     public void getFlickrImagesByTag(final String tag) {
 
-        final String URL = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=a84ba44f36d47381be62bdec75c968b1&text=" + tag + "&sort=interestingness-desc&format=json&nojsoncallback=1";
-
         Thread background = new Thread(new Runnable() {
 
             private final HttpClient client = new DefaultHttpClient();
@@ -40,7 +37,7 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
                 try {
                     Gson gson = new Gson();
                     String responseString;
-                    HttpGet httpget = new HttpGet(URL);
+                    HttpGet httpget = new HttpGet(buildRequestUrl(tag));
                     ResponseHandler<String> responseHandler = new BasicResponseHandler();
                     responseString = client.execute(httpget, responseHandler);
 
@@ -48,21 +45,15 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
                     FlickrResult f = gson.fromJson(responseString, FlickrResult.class);
 
                     if (f.getStat().equals("ok")) {
-
                         //generate url strings from result photos metadata
                         ArrayList<String> urls = generateFlickrPhotoUrls(f);
                         threadMsgSuccess(urls);
-
                     } else {
-
                         threadMsgError("error connecting with server");
-
                     }
 
                 } catch (Throwable t) {
-
                     threadMsgError("error connecting with server");
-
                 }
             }
 
@@ -78,14 +69,11 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
             }
 
             private void threadMsgError(String error) {
-
-                if (null != error && !error.isEmpty()) {
-                    Message msgObj = handler.obtainMessage();
-                    Bundle b = new Bundle();
-                    b.putString(HANDLER_PARAMETER_ERROR, error);
-                    msgObj.setData(b);
-                    handler.sendMessage(msgObj);
-                }
+                Message msgObj = handler.obtainMessage();
+                Bundle b = new Bundle();
+                b.putString(HANDLER_PARAMETER_ERROR, error);
+                msgObj.setData(b);
+                handler.sendMessage(msgObj);
             }
 
             // Define the Handler that receives messages from the thread and update the progress
@@ -109,10 +97,32 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
     }
 
     /**
-     * this method generates photo urls based on photo parameters.
+     * Build flickr search request URL
      *
-     * @param f result with photos
-     * @return photo url https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+     * @param tag text to search in flickr
+     * @return request url
+     */
+    private String buildRequestUrl(String tag){
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("https")
+                .authority("api.flickr.com")
+                .appendPath("services")
+                .appendPath("rest")
+                .appendQueryParameter("method", "flickr.photos.search")
+                .appendQueryParameter("api_key", "a84ba44f36d47381be62bdec75c968b1")
+                .appendQueryParameter("text", tag)
+                .appendQueryParameter("sort", "interestingness-desc")
+                .appendQueryParameter("format", "json")
+                .appendQueryParameter("nojsoncallback", "1");
+
+        return builder.build().toString();
+    }
+
+    /**
+     * generate photo urls based on photo parameters.
+     *
+     * @param f flickr response POJO containing photos.
+     * @return string list with photo urls (with format https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg).
      */
     private ArrayList<String> generateFlickrPhotoUrls(FlickrResult f) {
 
