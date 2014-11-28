@@ -1,7 +1,7 @@
 package es.solfamidas.elmundo.main.ui;
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.Menu;
@@ -42,7 +42,7 @@ public class MainActivity
         setupDrawer();
         setupToolBar();
 
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, new TestFragment())
                 .commit();
     }
@@ -101,7 +101,7 @@ public class MainActivity
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
             switch (position) {
                 case 0:

@@ -3,6 +3,7 @@ package es.solfamidas.elmundo.common.framework;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import es.solfamidas.elmundo.R;
@@ -24,6 +25,7 @@ public abstract class BaseToolBarActivity
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         if (mToolbar != null) {
+            Log.e("banana", "toolbar not null");
             setSupportActionBar(mToolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -41,5 +43,9 @@ public abstract class BaseToolBarActivity
 
     protected void setActionBarNavigationClickListener(View.OnClickListener cl) {
         mToolbar.setNavigationOnClickListener(cl);
+    }
+
+    protected void setActionBarTitle(String title){
+        getSupportActionBar().setTitle(title);
     }
 }
