@@ -40,6 +40,7 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
                     ResponseHandler<String> responseHandler = new BasicResponseHandler();
                     responseString = client.execute(httpget, responseHandler);
 
+
                     //convert json into POJO
                     FlickrResult f = gson.fromJson(responseString, FlickrResult.class);
 
@@ -66,6 +67,8 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
                     handler.sendMessage(msgObj);
                 }
             }
+
+
 
             private void threadMsgError(String error) {
                 Message msgObj = handler.obtainMessage();
