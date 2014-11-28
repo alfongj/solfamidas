@@ -15,6 +15,7 @@ import es.solfamidas.elmundo.R;
 import es.solfamidas.elmundo.common.framework.BaseToolBarActivity;
 import es.solfamidas.elmundo.main.presenter.MainPresenter;
 import es.solfamidas.elmundo.main.presenter.MainPresenterImpl;
+import es.solfamidas.elmundo.main.ui.fragments.CardsFragment;
 import es.solfamidas.elmundo.main.ui.fragments.TestFragment;
 
 import static android.view.View.OnClickListener;
@@ -108,7 +109,7 @@ public class MainActivity
                     transaction.replace(R.id.container, new TestFragment());
                     break;
                 case 1:
-                    transaction.replace(R.id.container, new TestFragment());
+                    transaction.replace(R.id.container, new CardsFragment());
                     break;
             }
             transaction.addToBackStack(null);
