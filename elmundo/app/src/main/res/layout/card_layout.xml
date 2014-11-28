@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        android:id="@+id/card_article_image" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="prueba title"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="22sp"
+        android:maxLines="3"
+        android:layout_height="wrap_content"
+        android:textColor="#ff030a2f"
+        android:paddingTop="4dp"
+        android:paddingBottom="2dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:id="@+id/card_article_title" />
+
+    <!--android:fontFamily="sans-serif"           // roboto regular-->
+    <!--android:fontFamily="sans-serif-light"     // roboto light-->
+    <!--android:fontFamily="sans-serif-condensed" // roboto condensed-->
+    <!--android:fontFamily="sans-serif-thin"      // roboto thin (android 4.2)-->
+    <!--android:fontFamily="sans-serif-medium"    // roboto medium (android 5.0)-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:textSize="15sp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:maxLines="3"
+        android:paddingRight="8dp"
+        android:text="prueba descripcion"
+        android:textColor="#ff030a2f"
+        android:fontFamily="sans-serif-thin"
+        android:layout_height="wrap_content"
+        android:id="@+id/card_article_desc" />
+
+</LinearLayout>
