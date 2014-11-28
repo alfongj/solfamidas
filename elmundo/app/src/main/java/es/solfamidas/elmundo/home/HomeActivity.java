@@ -38,8 +38,6 @@ public class HomeActivity extends BaseToolBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_home);
-
         setupToolBar();
 
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
