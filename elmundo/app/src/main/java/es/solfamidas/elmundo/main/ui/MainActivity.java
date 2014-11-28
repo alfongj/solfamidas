@@ -2,6 +2,7 @@ package es.solfamidas.elmundo.main.ui;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.Menu;
@@ -11,7 +12,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import es.solfamidas.elmundo.R;
+import es.solfamidas.elmundo.common.datasource.ElMundoDataSourceImpl;
 import es.solfamidas.elmundo.common.framework.BaseToolBarActivity;
 import es.solfamidas.elmundo.main.presenter.MainPresenter;
 import es.solfamidas.elmundo.main.presenter.MainPresenterImpl;
@@ -32,7 +36,11 @@ public class MainActivity
 
     @Override
     public void injectModuleDependencies() {
-        mPresenter = new MainPresenterImpl(this);
+        mPresenter = new MainPresenterImpl(
+                this,
+                new ElMundoDataSourceImpl(
+                        new Handler(),
+                        new DefaultHttpClient()));
     }
 
 
@@ -45,6 +53,13 @@ public class MainActivity
         getFragmentManager().beginTransaction()
                 .add(R.id.container, new TestFragment())
                 .commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mPresenter.onResume();
     }
 
     private void setupDrawer() {
