@@ -43,14 +43,7 @@ public class ArticleFeedPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Fragment feedFragment = new ArticleFeedFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(
-                ArticleFeedFragment.FEED_TYPE_ARG,
-                getFeedTypeByTabIndex(position));
-        feedFragment.setArguments(args);
-
-        return feedFragment;
+        return ArticleFeedFragment.newInstance(getFeedTypeByTabIndex(position));
     }
 
 

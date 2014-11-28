@@ -15,7 +15,7 @@ import es.solfamidas.elmundo.R;
  */
 public class ArticleFeedFragment extends Fragment {
 
-    public static final String FEED_TYPE_ARG = "FEED_TYPE";
+    private static final String FEED_TYPE_ARG = "FEED_TYPE";
 
     public static enum FeedType {
         ALBUMES,
@@ -33,6 +33,14 @@ public class ArticleFeedFragment extends Fragment {
     private TextView dummy;
 
 
+
+    public static ArticleFeedFragment newInstance(FeedType feedTypeByTabIndex) {
+        ArticleFeedFragment fragment = new ArticleFeedFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(FEED_TYPE_ARG, feedTypeByTabIndex);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
