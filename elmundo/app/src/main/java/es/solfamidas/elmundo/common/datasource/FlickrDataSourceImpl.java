@@ -22,8 +22,13 @@ import es.solfamidas.elmundo.entities.FlickrResult;
 public class FlickrDataSourceImpl implements FlickrDataSource {
 
 
-    private final String HANDLER_PARAMETER_URLS = "photo_urls";
-    private final String HANDLER_PARAMETER_ERROR = "error";
+    private final String HANDLER_PARAMETER_URLS_KEY = "photo_urls";
+    private final String HANDLER_PARAMETER_ERROR_KEY = "error";
+
+    private final String HANDLER_TYPE_KEY = "type";
+    private final int HANDLER_CODE_ERROR = 1;
+    private final int HANDLER_CODE_SUCCESS = 0;
+
 
     @Override
     public void getFlickrImagesByTag(final String tag, final int numberOfPhotos, final ImagesByTagCallback callback) {
@@ -47,33 +52,35 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
                     if (f.getStat().equals("ok")) {
                         //generate url strings from result photos metadata
                         ArrayList<String> urls = generateFlickrPhotoUrls(f);
-                        threadMsgSuccess(urls);
+                        if (!urls.isEmpty())
+                            threadMsgSuccess(urls);
+                        else {
+                            threadMsgError("No results found");
+                        }
                     } else {
-                        threadMsgError("error connecting with server");
+                        threadMsgError("Server error");
                     }
 
                 } catch (Throwable t) {
-                    threadMsgError("error connecting with server");
+                    threadMsgError("Error connecting with server");
                 }
             }
 
             private void threadMsgSuccess(ArrayList<String> urls) {
-
-                if (null != urls && !urls.isEmpty()) {
-                    Message msgObj = handler.obtainMessage();
-                    Bundle b = new Bundle();
-                    b.putStringArrayList(HANDLER_PARAMETER_URLS, urls);
-                    msgObj.setData(b);
-                    handler.sendMessage(msgObj);
-                }
+                Message msgObj = handler.obtainMessage();
+                Bundle b = new Bundle();
+                b.putInt(HANDLER_TYPE_KEY, HANDLER_CODE_SUCCESS);
+                b.putStringArrayList(HANDLER_PARAMETER_URLS_KEY, urls);
+                msgObj.setData(b);
+                handler.sendMessage(msgObj);
             }
-
 
 
             private void threadMsgError(String error) {
                 Message msgObj = handler.obtainMessage();
                 Bundle b = new Bundle();
-                b.putString(HANDLER_PARAMETER_ERROR, error);
+                b.putInt(HANDLER_TYPE_KEY, HANDLER_CODE_ERROR);
+                b.putString(HANDLER_PARAMETER_ERROR_KEY, error);
                 msgObj.setData(b);
                 handler.sendMessage(msgObj);
             }
@@ -82,15 +89,16 @@ public class FlickrDataSourceImpl implements FlickrDataSource {
 
                 public void handleMessage(Message msg) {
 
-                    String error = msg.getData().getString(HANDLER_PARAMETER_ERROR, "");
-                    ArrayList<String> urls = msg.getData().getStringArrayList(HANDLER_PARAMETER_URLS);
-
-                    if (error.isEmpty()) {
-                        //TODO send result info to presenter
+                    int type = msg.getData().getInt(HANDLER_TYPE_KEY, HANDLER_CODE_ERROR);
+                    if (type == HANDLER_CODE_SUCCESS) {
+                        ArrayList<String> urls =
+                                msg.getData().getStringArrayList(HANDLER_PARAMETER_URLS_KEY);
                         callback.onSuccess(urls);
-                    } else {
-                        //TODO send error to presenter
+
+                    } else if (type == HANDLER_CODE_ERROR) {
+                        String error = msg.getData().getString(HANDLER_PARAMETER_ERROR_KEY, "");
                         callback.onError(error);
+
                     }
                 }
             };
