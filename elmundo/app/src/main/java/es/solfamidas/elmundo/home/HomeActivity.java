@@ -1,5 +1,6 @@
 package es.solfamidas.elmundo.home;
 
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -12,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
+import android.view.View;
 
 import com.astuetz.PagerSlidingTabStrip;
 
@@ -53,7 +55,7 @@ public class HomeActivity extends BaseToolBarActivity {
 
         tabs.setViewPager(pager);
 
-        //changeColor(currentColor);
+        changeColor(currentColor);
     }
 
     private void setupToolBar() {
@@ -128,6 +130,13 @@ public class HomeActivity extends BaseToolBarActivity {
         }
 
         currentColor = newColor;
+
+    }
+
+    public void onColorClicked(View v) {
+
+        int color = Color.parseColor(v.getTag().toString());
+        changeColor(color);
 
     }
 
