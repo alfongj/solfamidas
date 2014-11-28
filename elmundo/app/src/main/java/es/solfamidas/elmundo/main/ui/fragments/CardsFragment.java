@@ -49,7 +49,8 @@ public class CardsFragment extends Fragment {
             ArticleCard card = new ArticleCard(getActivity(), R.layout.card_layout);
             card.setSwipeable(true);
             card.setId(article.getGuid());
-            card.setArticleContent(article.getTitle(), article.getDescription(), article.getImage().getThumbnail().getUrl());
+            card.setArticleContent(article.getTitle(), article.getDescription(),
+                    article.getImage().getThumbnail().getUrl());
             card.setCardElevation(5);
             cards.add(card);
         }
@@ -63,6 +64,5 @@ public class CardsFragment extends Fragment {
             listView.setAdapter(mCardArrayAdapter);
         }
     }
-
 }
 

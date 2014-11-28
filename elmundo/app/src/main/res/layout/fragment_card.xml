@@ -12,7 +12,7 @@
         android:id="@+id/myList"
         card:list_card_layout_resourceID="@layout/native_list_card_thumbnail_layout" />
 
-    <!-- Include undo message layout -->
+    <!-- undo message layout -->
     <include layout="@layout/list_card_undo_materialmobile_message" />
 
 </FrameLayout>
