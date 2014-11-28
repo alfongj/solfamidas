@@ -1,8 +1,11 @@
 package es.solfamidas.elmundo.main.ui;
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+<<<<<<< HEAD
 import android.os.Handler;
+=======
+import android.support.v4.app.FragmentTransaction;
+>>>>>>> master
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.Menu;
@@ -17,8 +20,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import es.solfamidas.elmundo.R;
 import es.solfamidas.elmundo.common.datasource.ElMundoDataSourceImpl;
 import es.solfamidas.elmundo.common.framework.BaseToolBarActivity;
-import es.solfamidas.elmundo.main.presenter.MainPresenter;
-import es.solfamidas.elmundo.main.presenter.MainPresenterImpl;
+import es.solfamidas.elmundo.home.presenter.HomePresenter;
+import es.solfamidas.elmundo.home.presenter.HomePresenterImpl;
 import es.solfamidas.elmundo.main.ui.fragments.TestFragment;
 
 import static android.view.View.OnClickListener;
@@ -31,12 +34,12 @@ public class MainActivity
     private DrawerLayout mDrawer;
 
     // Injected vars
-    private MainPresenter mPresenter;
+    private HomePresenter mPresenter;
 
 
     @Override
     public void injectModuleDependencies() {
-        mPresenter = new MainPresenterImpl(
+        mPresenter = new HomePresenterImpl(
                 this,
                 new ElMundoDataSourceImpl(
                         new Handler(),
@@ -50,7 +53,7 @@ public class MainActivity
         setupDrawer();
         setupToolBar();
 
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, new TestFragment())
                 .commit();
     }
@@ -116,7 +119,7 @@ public class MainActivity
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
             switch (position) {
                 case 0:

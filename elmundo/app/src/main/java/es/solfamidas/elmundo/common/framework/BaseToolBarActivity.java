@@ -42,4 +42,8 @@ public abstract class BaseToolBarActivity
     protected void setActionBarNavigationClickListener(View.OnClickListener cl) {
         mToolbar.setNavigationOnClickListener(cl);
     }
+
+    protected void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
+    }
 }

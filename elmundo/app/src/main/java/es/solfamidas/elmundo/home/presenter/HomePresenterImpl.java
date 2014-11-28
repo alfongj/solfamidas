@@ -1,4 +1,4 @@
-package es.solfamidas.elmundo.main.presenter;
+package es.solfamidas.elmundo.home.presenter;
 
 import android.util.Log;
 
@@ -11,7 +11,7 @@ import es.solfamidas.elmundo.main.ui.MainUi;
 /**
  * TODO: Do something
  */
-public class MainPresenterImpl implements MainPresenter {
+public class HomePresenterImpl implements HomePresenter {
 
     private static final String TAG = MainPresenterImpl.class.getSimpleName();
 
@@ -19,7 +19,7 @@ public class MainPresenterImpl implements MainPresenter {
     MainUi mUi;
     ElMundoDataSource mElMundoDataSource;
 
-    public MainPresenterImpl(
+    public HomePresenterImpl(
             MainUi ui,
             ElMundoDataSource elMundoDataSource
     ) {
