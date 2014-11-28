@@ -1,4 +1,4 @@
-package es.solfamidas.elmundo.home;
+package es.solfamidas.elmundo.home.ui;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -8,9 +8,6 @@ import android.graphics.drawable.TransitionDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 import android.view.View;
@@ -19,7 +16,6 @@ import com.astuetz.PagerSlidingTabStrip;
 
 import es.solfamidas.elmundo.R;
 import es.solfamidas.elmundo.common.framework.BaseToolBarActivity;
-import es.solfamidas.elmundo.main.ui.fragments.TestFragment;
 
 public class HomeActivity extends BaseToolBarActivity {
 
@@ -28,7 +24,7 @@ public class HomeActivity extends BaseToolBarActivity {
 
     private PagerSlidingTabStrip tabs;
     private ViewPager pager;
-    private MyPagerAdapter adapter;
+    private ArticleFeedPagerAdapter adapter;
     private int currentColor = 0xFF666666;
 
     private Drawable oldBackground = null;
@@ -42,7 +38,7 @@ public class HomeActivity extends BaseToolBarActivity {
 
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         pager = (ViewPager) findViewById(R.id.pager);
-        adapter = new MyPagerAdapter(getSupportFragmentManager());
+        adapter = new ArticleFeedPagerAdapter(getSupportFragmentManager());
 
         final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources()
                 .getDisplayMetrics());
@@ -140,32 +136,6 @@ public class HomeActivity extends BaseToolBarActivity {
 
     @Override
     public void injectModuleDependencies() {
-
-    }
-
-    public class MyPagerAdapter extends FragmentPagerAdapter {
-
-        private final String[] TITLES = { "Categories", "Home", "Top Paid", "Top Free", "Top Grossing", "Top New Paid",
-                "Top New Free", "Trending" };
-
-        public MyPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return TITLES[position];
-        }
-
-        @Override
-        public int getCount() {
-            return TITLES.length;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return new TestFragment();
-        }
 
     }
 }

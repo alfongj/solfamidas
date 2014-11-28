@@ -1,17 +1,17 @@
-package es.solfamidas.elmundo.main.presenter;
+package es.solfamidas.elmundo.home.presenter;
 
 import es.solfamidas.elmundo.main.ui.MainUi;
 
 /**
  * TODO: Do something
  */
-public class MainPresenterImpl implements MainPresenter {
+public class HomePresenterImpl implements HomePresenter {
 
     // Injected vars
     MainUi mUi;
 
 
-    public MainPresenterImpl(
+    public HomePresenterImpl(
             MainUi ui
     ) {
         mUi = ui;

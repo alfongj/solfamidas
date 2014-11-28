@@ -13,8 +13,8 @@ import android.widget.ListView;
 
 import es.solfamidas.elmundo.R;
 import es.solfamidas.elmundo.common.framework.BaseToolBarActivity;
-import es.solfamidas.elmundo.main.presenter.MainPresenter;
-import es.solfamidas.elmundo.main.presenter.MainPresenterImpl;
+import es.solfamidas.elmundo.home.presenter.HomePresenter;
+import es.solfamidas.elmundo.home.presenter.HomePresenterImpl;
 import es.solfamidas.elmundo.main.ui.fragments.TestFragment;
 
 import static android.view.View.OnClickListener;
@@ -27,12 +27,12 @@ public class MainActivity
     private DrawerLayout mDrawer;
 
     // Injected vars
-    private MainPresenter mPresenter;
+    private HomePresenter mPresenter;
 
 
     @Override
     public void injectModuleDependencies() {
-        mPresenter = new MainPresenterImpl(this);
+        mPresenter = new HomePresenterImpl(this);
     }
 
 
