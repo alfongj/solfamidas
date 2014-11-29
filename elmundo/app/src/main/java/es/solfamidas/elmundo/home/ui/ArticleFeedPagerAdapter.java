@@ -4,10 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import static es.solfamidas.elmundo.common.datasource.ElMundoDataSource.Category;
-
 import es.solfamidas.elmundo.home.presenter.HomePresenter;
 import es.solfamidas.elmundo.home.ui.fragments.ArticleFeedFragment;
+
+import static es.solfamidas.elmundo.common.datasource.ElMundoDataSource.Category;
 
 /**
  * Contains the article categories.

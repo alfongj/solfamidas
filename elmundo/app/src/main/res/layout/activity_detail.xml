@@ -1,0 +1,81 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEEEEE"
+    android:orientation="vertical"
+    tools:context="es.solfamidas.elmundo.home.ui.DetailActivity">
+
+    <es.solfamidas.elmundo.home.ui.ObservableScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:id="@+id/articleImageView" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="8dp"
+                android:textColor="#ff030a2f"
+                android:paddingBottom="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="22sp"
+                android:id="@+id/articleTitleTv" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:textColor="#ff030a2f"
+                android:paddingBottom="8dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Small Text"
+                android:id="@+id/articleAuthorTv" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:textColor="#ff030a2f"
+                android:paddingBottom="8dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Small Text"
+                android:id="@+id/articleDateTv" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:textColor="#ff030a2f"
+                android:paddingBottom="8dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="15sp"
+                android:clickable="true"
+                android:fontFamily="sans-serif-thin"
+                android:id="@+id/articleDescTv" />
+        </LinearLayout>
+
+    </es.solfamidas.elmundo.home.ui.ObservableScrollView>
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+</FrameLayout>

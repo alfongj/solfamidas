@@ -2,7 +2,6 @@ package es.solfamidas.elmundo.common.datasource;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.Handler;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -10,11 +9,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
-
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicResponseHandler;
 
 import java.lang.reflect.Type;
 import java.util.List;

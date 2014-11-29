@@ -2,7 +2,9 @@ package es.solfamidas.elmundo.entities;
 
 import com.google.gson.annotations.Expose;
 
-public class ArticleImage {
+import java.io.Serializable;
+
+public class ArticleImage implements Serializable{
 
     @Expose
     private String url;
