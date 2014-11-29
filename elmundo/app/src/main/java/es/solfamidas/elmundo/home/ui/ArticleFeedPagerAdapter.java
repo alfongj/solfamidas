@@ -21,7 +21,9 @@ public class ArticleFeedPagerAdapter extends FragmentPagerAdapter {
             "Internacional",
             "Mi Mundo"};
 
+    // Injected vars
     private final HomePresenter mHomePresenter;
+
 
 
     public ArticleFeedPagerAdapter(
@@ -30,6 +32,8 @@ public class ArticleFeedPagerAdapter extends FragmentPagerAdapter {
     ) {
         super(fragmentManager);
         mHomePresenter = homePresenter;
+
+        // mCachedFragments = new ArrayList<WeakReference<Fragment>>();
     }
 
     @Override
@@ -50,7 +54,6 @@ public class ArticleFeedPagerAdapter extends FragmentPagerAdapter {
 
         return articleFeedFragment;
     }
-
 
     private static Category getCategoryByTabIndex(int i) {
         return new Category[] {

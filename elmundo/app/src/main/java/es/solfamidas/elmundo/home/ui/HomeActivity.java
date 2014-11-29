@@ -62,7 +62,7 @@ public class HomeActivity
                 getResources().getDisplayMetrics());
         pager.setPageMargin(pageMargin);
         pager.setAdapter(adapter);
-        pager.setOffscreenPageLimit(6);
+        pager.setOffscreenPageLimit(2);
         tabs.setViewPager(pager);
 
         changeColor(currentColor);
