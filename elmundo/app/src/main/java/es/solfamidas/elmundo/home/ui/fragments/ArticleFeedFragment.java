@@ -34,12 +34,12 @@ public class ArticleFeedFragment extends Fragment {
     private TextView dummy;
 
 
-
     public void setPresenter(HomePresenter homePresenter) {
         mHomePresenter = homePresenter;
     }
 
-    public static ArticleFeedFragment newInstance(ElMundoDataSource.Category feedTypeByTabIndex) {
+    public static ArticleFeedFragment newInstance(
+            ElMundoDataSource.Category feedTypeByTabIndex) {
         ArticleFeedFragment fragment = new ArticleFeedFragment();
         Bundle args = new Bundle();
         args.putSerializable(FEED_TYPE_ARG, feedTypeByTabIndex);

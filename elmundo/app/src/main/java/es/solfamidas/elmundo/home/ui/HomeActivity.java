@@ -104,7 +104,7 @@ public class HomeActivity
 
             Drawable colorDrawable = new ColorDrawable(newColor);
             Drawable bottomDrawable = getResources().getDrawable(R.drawable.actionbar_bottom);
-            LayerDrawable ld = new LayerDrawable(new Drawable[] { colorDrawable, bottomDrawable });
+            LayerDrawable ld = new LayerDrawable(new Drawable[]{colorDrawable, bottomDrawable});
 
             if (oldBackground == null) {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -113,7 +113,7 @@ public class HomeActivity
                     getSupportActionBar().setBackgroundDrawable(ld);
                 }
             } else {
-                TransitionDrawable td = new TransitionDrawable(new Drawable[] { oldBackground, ld });
+                TransitionDrawable td = new TransitionDrawable(new Drawable[] {oldBackground, ld});
 
                 // workaround for broken ActionBarContainer drawable handling on
                 // pre-API 17 builds
