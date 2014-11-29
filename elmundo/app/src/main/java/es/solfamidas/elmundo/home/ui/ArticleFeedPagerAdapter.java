@@ -15,10 +15,10 @@ import es.solfamidas.elmundo.home.ui.fragments.ArticleFeedFragment;
 public class ArticleFeedPagerAdapter extends FragmentPagerAdapter {
 
     private static final String[] TITLES = {
-            "Ciencia",
-            "Espana",
-            "Economia",
+            "España",
             "Internacional",
+            "Ciencia",
+            "Economia",
             "Mi Mundo"};
 
     // Injected vars
@@ -32,8 +32,6 @@ public class ArticleFeedPagerAdapter extends FragmentPagerAdapter {
     ) {
         super(fragmentManager);
         mHomePresenter = homePresenter;
-
-        // mCachedFragments = new ArrayList<WeakReference<Fragment>>();
     }
 
     @Override
@@ -57,10 +55,10 @@ public class ArticleFeedPagerAdapter extends FragmentPagerAdapter {
 
     private static Category getCategoryByTabIndex(int i) {
         return new Category[] {
-                Category.CIENCIA,
                 Category.ESPANA,
-                Category.ECONOMIA,
                 Category.INTERNACIONAL,
+                Category.CIENCIA,
+                Category.ECONOMIA,
                 Category.MI_MUNDO
         }[i];
     }

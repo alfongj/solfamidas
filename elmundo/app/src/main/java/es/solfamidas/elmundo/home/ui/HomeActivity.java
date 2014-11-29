@@ -1,5 +1,6 @@
 package es.solfamidas.elmundo.home.ui;
 
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -27,7 +28,7 @@ public class HomeActivity
     private PagerSlidingTabStrip tabs;
     private ViewPager pager;
     private ArticleFeedPagerAdapter adapter;
-    private int currentColor = 0xFF666666;
+    private int currentColor = 0xFF406599;
 
     private Drawable oldBackground = null;
 
@@ -64,8 +65,31 @@ public class HomeActivity
         pager.setAdapter(adapter);
         pager.setOffscreenPageLimit(2);
         tabs.setViewPager(pager);
+        tabs.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int i) {
+                changeColor(getColorForTab(i));
+            }
+        });
 
         changeColor(currentColor);
+    }
+
+    private int getColorForTab(int i) {
+        switch (i) {
+            case 0:
+                return 0xFF406599;
+            case 1:
+                return 0xFFB8CFE1;
+            case 2:
+                return 0xFF908D5D;
+            case 3:
+                return 0xFFF2AA52;
+            case 4:
+                return 0xFF33393B;
+            default:
+                return Color.BLACK;
+        }
     }
 
     private void setupToolBar() {
