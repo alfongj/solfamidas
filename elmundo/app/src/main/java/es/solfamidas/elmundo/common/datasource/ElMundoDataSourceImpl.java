@@ -106,7 +106,7 @@ public class ElMundoDataSourceImpl implements ElMundoDataSource {
     private String getCategoryName(Category cat) {
         switch (cat) {
             case MI_MUNDO:
-                return "espana"; // TODO Change
+                return "mi_mundo";
             case CIENCIA:
                 return  "ciencia";
             case ECONOMIA:
