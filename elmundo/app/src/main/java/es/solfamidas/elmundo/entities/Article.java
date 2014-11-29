@@ -2,10 +2,11 @@ package es.solfamidas.elmundo.entities;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Article {
+public class Article implements Serializable{
 
     @Expose
     private String title;

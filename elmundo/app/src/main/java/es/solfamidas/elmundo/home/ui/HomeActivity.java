@@ -1,5 +1,6 @@
 package es.solfamidas.elmundo.home.ui;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -14,8 +15,13 @@ import android.view.View;
 
 import com.astuetz.PagerSlidingTabStrip;
 
+import java.util.Date;
+
 import es.solfamidas.elmundo.R;
 import es.solfamidas.elmundo.common.framework.BaseToolBarActivity;
+import es.solfamidas.elmundo.entities.Article;
+import es.solfamidas.elmundo.entities.ArticleImage;
+import es.solfamidas.elmundo.entities.ArticleThumbnail;
 
 public class HomeActivity extends BaseToolBarActivity {
 
@@ -49,6 +55,7 @@ public class HomeActivity extends BaseToolBarActivity {
         tabs.setViewPager(pager);
 
         changeColor(currentColor);
+
     }
 
     private void setupToolBar() {
