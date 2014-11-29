@@ -33,7 +33,6 @@ public class ArticleFeedFragment extends Fragment {
     private TextView dummy;
 
 
-
     public static ArticleFeedFragment newInstance(FeedType feedTypeByTabIndex) {
         ArticleFeedFragment fragment = new ArticleFeedFragment();
         Bundle args = new Bundle();
