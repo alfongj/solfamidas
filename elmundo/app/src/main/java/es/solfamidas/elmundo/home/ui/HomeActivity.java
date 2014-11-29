@@ -29,7 +29,6 @@ public class HomeActivity extends BaseToolBarActivity {
 
     private Drawable oldBackground = null;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

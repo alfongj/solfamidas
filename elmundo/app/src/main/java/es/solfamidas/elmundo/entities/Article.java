@@ -208,4 +208,9 @@ public class Article {
         this.image = image;
     }
 
+
+    @Override
+    public String toString() {
+        return "El Mundo -  " + title + " " + link;
+    }
 }
