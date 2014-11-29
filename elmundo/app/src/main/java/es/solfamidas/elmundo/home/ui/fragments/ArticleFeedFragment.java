@@ -1,6 +1,5 @@
 package es.solfamidas.elmundo.home.ui.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,8 +17,6 @@ import es.solfamidas.elmundo.common.datasource.ElMundoDataSource;
 import es.solfamidas.elmundo.common.viewmodel.ArticleCard;
 import es.solfamidas.elmundo.entities.Article;
 import es.solfamidas.elmundo.home.presenter.HomePresenter;
-import es.solfamidas.elmundo.home.ui.ArticleCardClickListener;
-import es.solfamidas.elmundo.home.ui.DetailActivity;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.view.CardListView;
@@ -30,7 +27,7 @@ import it.gmariotti.cardslib.library.view.listener.dismiss.DefaultDismissableMan
  *
  * TODO Load more articles when scrolling down.
  */
-public class ArticleFeedFragment extends Fragment implements ArticleCardClickListener{
+public class ArticleFeedFragment extends Fragment {
 
     private static final String FEED_TYPE_ARG = "FEED_TYPE";
 
@@ -40,6 +37,7 @@ public class ArticleFeedFragment extends Fragment implements ArticleCardClickLis
 
     // Views
     private View mRootView;
+
 
 
     public void setPresenter(HomePresenter homePresenter) {
@@ -108,8 +106,15 @@ public class ArticleFeedFragment extends Fragment implements ArticleCardClickLis
         for (Article article : articles) {
             ArticleCard card = new ArticleCard(getActivity(), R.layout.card_layout);
             card.setSwipeable(true);
-            card.setArticleContent(article);
-            card.setListener(this);
+            card.setId(article.getGuid());
+            String thumbnailUrl = "";
+            if (article.getImage() != null) {
+                thumbnailUrl = article.getImage().getUrl();
+            }
+            card.setArticleContent(
+                    article.getTitle(),
+                    article.getSummary(),
+                    thumbnailUrl);
             card.setCardElevation(5);
             cards.add(card);
         }
@@ -122,12 +127,5 @@ public class ArticleFeedFragment extends Fragment implements ArticleCardClickLis
         if (listView != null) {
             listView.setAdapter(mCardArrayAdapter);
         }
-    }
-
-    @Override
-    public void onArticleClick(Article article) {
-        Intent detailsIntent = new Intent(getActivity(), DetailActivity.class);
-        detailsIntent.putExtra(DetailActivity.EXTRA_ARTICLE, article);
-        startActivity(detailsIntent);
     }
 }

@@ -35,6 +35,8 @@ public class HomeActivity
     // Injected vars
     private HomePresenter mPresenter;
 
+
+
     @Override
     public void injectModuleDependencies() {
         mPresenter = new HomePresenterImpl(
@@ -71,7 +73,6 @@ public class HomeActivity
         });
 
         changeColor(currentColor);
-
     }
 
     private int getColorForTab(int i) {
@@ -159,5 +160,4 @@ public class HomeActivity
 
         currentColor = newColor;
     }
-
 }

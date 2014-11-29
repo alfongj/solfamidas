@@ -2,11 +2,10 @@ package es.solfamidas.elmundo.entities;
 
 import com.google.gson.annotations.Expose;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Article implements Serializable{
+public class Article {
 
     @Expose
     private String title;
@@ -169,9 +168,4 @@ public class Article implements Serializable{
         this.image = image;
     }
 
-
-    @Override
-    public String toString() {
-        return "El Mundo -  " + title + " " + link;
-    }
 }

@@ -28,12 +28,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:textSize="15sp"
-        android:fontFamily="sans-serif-thin"
         android:paddingBottom="8dp"
         android:paddingLeft="8dp"
         android:maxLines="3"
         android:paddingRight="8dp"
         android:textColor="#ff030a2f"
+        android:fontFamily="sans-serif-thin"
         android:layout_height="wrap_content"
         android:id="@+id/card_article_desc" />
 

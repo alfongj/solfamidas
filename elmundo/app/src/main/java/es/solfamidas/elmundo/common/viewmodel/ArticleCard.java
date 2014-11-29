@@ -1,29 +1,27 @@
 package es.solfamidas.elmundo.common.viewmodel;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import es.solfamidas.elmundo.R;
-import es.solfamidas.elmundo.entities.Article;
-import es.solfamidas.elmundo.home.ui.ArticleCardClickListener;
 import it.gmariotti.cardslib.library.internal.Card;
 
 public class ArticleCard extends Card {
 
-
+    private static final String NO_IMAGE_URL =
+            "http://www.lucirfashion.com/blog/images/img_not_found.gif";
     protected TextView mTitle;
     protected TextView mDescription;
     protected ImageView mImage;
 
-    protected ArticleCardClickListener listener;
-
-    public Article mArticle;
-
+    public String title, mSummary, imgUrl;
 
     /**
      * Constructor with a custom inner layout
@@ -43,13 +41,10 @@ public class ArticleCard extends Card {
         init();
     }
 
-    public void setListener(ArticleCardClickListener listener) {
-        this.listener = listener;
-    }
-
-    public void setArticleContent(Article article) {
-        mArticle = article;
-        setId(mArticle.getGuid());
+    public void setArticleContent(String title, String summary, String imgUrl) {
+        this.title = title;
+        mSummary = summary;
+        this.imgUrl = imgUrl;
     }
 
     /**
@@ -57,11 +52,13 @@ public class ArticleCard extends Card {
      */
     private void init() {
 
+        //No Header
+
         //Set a OnClickListener listener
         setOnClickListener(new OnCardClickListener() {
             @Override
             public void onClick(Card card, View view) {
-                listener.onArticleClick(mArticle);
+                Toast.makeText(getContext(), "Click Listener card=", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -77,22 +74,20 @@ public class ArticleCard extends Card {
         mImage = (ImageView) parent.findViewById(R.id.card_article_image);
 
         if (mTitle != null) {
-            mTitle.setText(mArticle.getTitle());
+            mTitle.setText(title);
         }
 
         if (mDescription != null) {
-            mDescription.setText(mArticle.getSummary());
+            mDescription.setText(mSummary);
         }
 
         if (mImage != null) {
-            String thumbnailUrl = "";
-            if (mArticle.getImage() != null) {
-                thumbnailUrl = mArticle.getImage().getUrl();
-                Picasso.with(getContext()).load(thumbnailUrl).resize(800, 500).centerCrop().into(mImage);
-            } else {
-                mImage.setVisibility(View.GONE);
+            
+            if (imgUrl == null || imgUrl.isEmpty()) {
+                imgUrl = NO_IMAGE_URL;
             }
-
+            
+            Picasso.with(getContext()).load(imgUrl).resize(800, 500).centerCrop().into(mImage);
         }
     }
 }
