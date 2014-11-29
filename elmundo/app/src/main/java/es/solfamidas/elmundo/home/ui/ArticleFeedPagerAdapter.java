@@ -1,13 +1,12 @@
 package es.solfamidas.elmundo.home.ui;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import static es.solfamidas.elmundo.home.ui.fragments.ArticleFeedFragment.FeedType;
-
 import es.solfamidas.elmundo.home.ui.fragments.ArticleFeedFragment;
+
+import static es.solfamidas.elmundo.home.ui.fragments.ArticleFeedFragment.FeedType;
 
 /**
  * Contains the article categories.
@@ -22,7 +21,6 @@ public class ArticleFeedPagerAdapter extends FragmentPagerAdapter {
             "Internacional",
             "Local",
             "Mi Mundo"};
-
 
 
     public ArticleFeedPagerAdapter(
@@ -47,9 +45,8 @@ public class ArticleFeedPagerAdapter extends FragmentPagerAdapter {
     }
 
 
-
     private static FeedType getFeedTypeByTabIndex(int i) {
-        return new FeedType[] {
+        return new FeedType[]{
                 FeedType.ALBUMES,
                 FeedType.CIENCIA,
                 FeedType.ESPANA,

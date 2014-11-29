@@ -1,4 +1,3 @@
-
 package es.solfamidas.elmundo.entities;
 
 import com.google.gson.annotations.Expose;
@@ -23,144 +22,112 @@ public class ArticleImage {
     private ArticleThumbnail thumbnail;
 
     /**
-     * 
-     * @return
-     *     The url
+     * @return The url
      */
     public String getUrl() {
         return url;
     }
 
     /**
-     * 
-     * @param url
-     *     The url
+     * @param url The url
      */
     public void setUrl(String url) {
         this.url = url;
     }
 
     /**
-     * 
-     * @return
-     *     The medium
+     * @return The medium
      */
     public String getMedium() {
         return medium;
     }
 
     /**
-     * 
-     * @param medium
-     *     The medium
+     * @param medium The medium
      */
     public void setMedium(String medium) {
         this.medium = medium;
     }
 
     /**
-     * 
-     * @return
-     *     The width
+     * @return The width
      */
     public String getWidth() {
         return width;
     }
 
     /**
-     * 
-     * @param width
-     *     The width
+     * @param width The width
      */
     public void setWidth(String width) {
         this.width = width;
     }
 
     /**
-     * 
-     * @return
-     *     The height
+     * @return The height
      */
     public String getHeight() {
         return height;
     }
 
     /**
-     * 
-     * @param height
-     *     The height
+     * @param height The height
      */
     public void setHeight(String height) {
         this.height = height;
     }
 
     /**
-     * 
-     * @return
-     *     The type
+     * @return The type
      */
     public String getType() {
         return type;
     }
 
     /**
-     * 
-     * @param type
-     *     The type
+     * @param type The type
      */
     public void setType(String type) {
         this.type = type;
     }
 
     /**
-     * 
-     * @return
-     *     The title
+     * @return The title
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     * 
-     * @param title
-     *     The title
+     * @param title The title
      */
     public void setTitle(String title) {
         this.title = title;
     }
 
     /**
-     * 
-     * @return
-     *     The description
+     * @return The description
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * 
-     * @param description
-     *     The description
+     * @param description The description
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * 
-     * @return
-     *     The thumbnail
+     * @return The thumbnail
      */
     public ArticleThumbnail getThumbnail() {
         return thumbnail;
     }
 
     /**
-     * 
-     * @param thumbnail
-     *     The thumbnail
+     * @param thumbnail The thumbnail
      */
     public void setThumbnail(ArticleThumbnail thumbnail) {
         this.thumbnail = thumbnail;

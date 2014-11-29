@@ -88,7 +88,7 @@ public class HomeActivity extends BaseToolBarActivity {
 
             Drawable colorDrawable = new ColorDrawable(newColor);
             Drawable bottomDrawable = getResources().getDrawable(R.drawable.actionbar_bottom);
-            LayerDrawable ld = new LayerDrawable(new Drawable[] { colorDrawable, bottomDrawable });
+            LayerDrawable ld = new LayerDrawable(new Drawable[]{colorDrawable, bottomDrawable});
 
             if (oldBackground == null) {
 
@@ -100,7 +100,7 @@ public class HomeActivity extends BaseToolBarActivity {
 
             } else {
 
-                TransitionDrawable td = new TransitionDrawable(new Drawable[] { oldBackground, ld });
+                TransitionDrawable td = new TransitionDrawable(new Drawable[]{oldBackground, ld});
 
                 // workaround for broken ActionBarContainer drawable handling on
                 // pre-API 17 builds
