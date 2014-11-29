@@ -9,7 +9,7 @@
     <es.solfamidas.elmundo.home.ui.ObservableScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/scrollView" >
+        android:id="@+id/scrollView">
 
         <LinearLayout
             android:orientation="vertical"
@@ -31,9 +31,7 @@
                 android:textColor="#ff030a2f"
                 android:paddingBottom="8dp"
                 android:fontFamily="sans-serif-medium"
-                android:textStyle="bold"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
+                android:textSize="22sp"
                 android:id="@+id/articleTitleTv" />
 
             <TextView
@@ -44,7 +42,6 @@
                 android:paddingRight="8dp"
                 android:textColor="#ff030a2f"
                 android:paddingBottom="8dp"
-                android:textStyle="bold"
                 android:fontFamily="sans-serif-condensed"
                 android:text="Small Text"
                 android:id="@+id/articleAuthorTv" />
@@ -56,7 +53,6 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:textColor="#ff030a2f"
-                android:textStyle="bold"
                 android:paddingBottom="8dp"
                 android:fontFamily="sans-serif-condensed"
                 android:text="Small Text"
@@ -70,7 +66,7 @@
                 android:textColor="#ff030a2f"
                 android:paddingBottom="8dp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Small Text"
+                android:textSize="15sp"
                 android:fontFamily="sans-serif-thin"
                 android:id="@+id/articleDescTv" />
         </LinearLayout>

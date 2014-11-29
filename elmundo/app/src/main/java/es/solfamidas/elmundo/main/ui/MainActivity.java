@@ -14,8 +14,7 @@ import android.widget.ListView;
 import es.solfamidas.elmundo.R;
 import es.solfamidas.elmundo.common.framework.BaseToolBarActivity;
 import es.solfamidas.elmundo.home.presenter.HomePresenter;
-import es.solfamidas.elmundo.home.presenter.HomePresenterImpl;
-import es.solfamidas.elmundo.main.ui.fragments.CardsFragment;
+import es.solfamidas.elmundo.home.ui.fragments.ArticleFeedFragment;
 import es.solfamidas.elmundo.main.ui.fragments.TestFragment;
 
 import static android.view.View.OnClickListener;
@@ -31,11 +30,11 @@ public class MainActivity
     private HomePresenter mPresenter;
 
 
+
     @Override
     public void injectModuleDependencies() {
-        mPresenter = new HomePresenterImpl(this);
-    }
 
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +45,13 @@ public class MainActivity
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, new TestFragment())
                 .commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mPresenter.onResume();
     }
 
     private void setupDrawer() {
@@ -109,7 +115,7 @@ public class MainActivity
                     transaction.replace(R.id.container, new TestFragment());
                     break;
                 case 1:
-                    transaction.replace(R.id.container, new CardsFragment());
+                    transaction.replace(R.id.container, new ArticleFeedFragment());
                     break;
             }
             transaction.addToBackStack(null);

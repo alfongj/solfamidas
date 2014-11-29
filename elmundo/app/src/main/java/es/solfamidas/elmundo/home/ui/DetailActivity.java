@@ -8,8 +8,10 @@ import android.graphics.drawable.TransitionDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +27,7 @@ import es.solfamidas.elmundo.home.presenter.DetailPresenterImpl;
 public class DetailActivity extends BaseToolBarActivity implements DetailUI, ScrollViewListener {
 
     public static final String EXTRA_ARTICLE = "extra_article";
+    public static final String NO_IMAGE_URL = "http://www.lucirfashion.com/blog/images/img_not_found.gif";
 
     private ImageView mImageView;
     private TextView mTitleTv, mDescTv, mAuthorTv, mDateTv;
@@ -62,6 +65,13 @@ public class DetailActivity extends BaseToolBarActivity implements DetailUI, Scr
 
         mArticle = (Article) getIntent().getExtras().getSerializable(EXTRA_ARTICLE);
         presenter.getArticle(mArticle);
+
+        setActionBarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -97,10 +107,19 @@ public class DetailActivity extends BaseToolBarActivity implements DetailUI, Scr
     @Override
     public void renderArticle(Article mArticle) {
         mTitleTv.setText(mArticle.getTitle());
-        mDescTv.setText(mArticle.getDescription());
+        mDescTv.setText(Html.fromHtml(mArticle.getDescription()));
         mAuthorTv.setText(mArticle.getAuthor());
-        mDateTv.setText("actualizado: " + mArticle.getDate());
-        Picasso.with(this).load(mArticle.getImage().getThumbnail().getUrl()).into(mImageView);
+        mDateTv.setText("Actualizado: " + mArticle.getDate());
+
+        if (mImageView != null) {
+            String thumbnailUrl = "";
+            if (mArticle.getImage() != null) {
+                thumbnailUrl = mArticle.getImage().getUrl();
+                Picasso.with(this).load(thumbnailUrl).into(mImageView);
+            } else {
+                Picasso.with(this).load(NO_IMAGE_URL).into(mImageView);
+            }
+        }
     }
 
     @Override
