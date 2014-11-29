@@ -1,12 +1,12 @@
 package es.solfamidas.elmundo.home.ui;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import static es.solfamidas.elmundo.home.ui.fragments.ArticleFeedFragment.FeedType;
+import static es.solfamidas.elmundo.common.datasource.ElMundoDataSource.Category;
 
+import es.solfamidas.elmundo.home.presenter.HomePresenter;
 import es.solfamidas.elmundo.home.ui.fragments.ArticleFeedFragment;
 
 /**
@@ -15,20 +15,22 @@ import es.solfamidas.elmundo.home.ui.fragments.ArticleFeedFragment;
 public class ArticleFeedPagerAdapter extends FragmentPagerAdapter {
 
     private static final String[] TITLES = {
-            "Albumes",
             "Ciencia",
             "Espana",
             "Economia",
             "Internacional",
-            "Local",
             "Mi Mundo"};
+
+    private final HomePresenter mHomePresenter;
 
 
 
     public ArticleFeedPagerAdapter(
-            FragmentManager fragmentManager
+            FragmentManager fragmentManager,
+            HomePresenter homePresenter
     ) {
         super(fragmentManager);
+        mHomePresenter = homePresenter;
     }
 
     @Override
@@ -43,21 +45,22 @@ public class ArticleFeedPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return ArticleFeedFragment.newInstance(getFeedTypeByTabIndex(position));
+        ArticleFeedFragment articleFeedFragment =
+                ArticleFeedFragment.newInstance(getCategoryByTabIndex(position));
+        articleFeedFragment.setPresenter(mHomePresenter);
+
+        return articleFeedFragment;
     }
 
 
 
-    private static FeedType getFeedTypeByTabIndex(int i) {
-        return new FeedType[] {
-                FeedType.ALBUMES,
-                FeedType.CIENCIA,
-                FeedType.ESPANA,
-                FeedType.ECONOMIA,
-                FeedType.INTERNACIONAL,
-                FeedType.LOCAL,
-                FeedType.MI_MUNDO
+    private static Category getCategoryByTabIndex(int i) {
+        return new Category[] {
+                Category.CIENCIA,
+                Category.ESPANA,
+                Category.ECONOMIA,
+                Category.INTERNACIONAL,
+                Category.MI_MUNDO
         }[i];
     }
-
 }

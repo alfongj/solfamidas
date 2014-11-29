@@ -10,11 +10,11 @@ import es.solfamidas.elmundo.entities.Article;
 public interface ElMundoDataSource {
 
     public enum Category {
-        ALBUMES,
         CIENCIA,
         ESPANA,
         ECONOMIA,
-        INTERNACIONAL
+        INTERNACIONAL,
+        MI_MUNDO
     }
 
     public void getArticles(Category cat, int limit, int from, ArticlesCallback callback);

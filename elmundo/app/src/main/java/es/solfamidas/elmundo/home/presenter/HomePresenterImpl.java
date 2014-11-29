@@ -6,21 +6,21 @@ import java.util.List;
 
 import es.solfamidas.elmundo.common.datasource.ElMundoDataSource;
 import es.solfamidas.elmundo.entities.Article;
-import es.solfamidas.elmundo.main.ui.MainUi;
+import es.solfamidas.elmundo.home.ui.HomeUi;
 
 /**
  * TODO: Do something
  */
 public class HomePresenterImpl implements HomePresenter {
 
-    private static final String TAG = MainPresenterImpl.class.getSimpleName();
+    private static final String TAG = HomePresenterImpl.class.getSimpleName();
 
     // Injected vars
-    MainUi mUi;
+    HomeUi mUi;
     ElMundoDataSource mElMundoDataSource;
 
     public HomePresenterImpl(
-            MainUi ui,
+            HomeUi ui,
             ElMundoDataSource elMundoDataSource
     ) {
         mUi = ui;
@@ -46,5 +46,14 @@ public class HomePresenterImpl implements HomePresenter {
                         Log.e(TAG, errorMsg);
                     }
                 });
+    }
+
+    @Override
+    public void loadArticles(
+            ElMundoDataSource.Category category,
+            int limit,
+            int from,
+            ElMundoDataSource.ArticlesCallback callback) {
+        mElMundoDataSource.getArticles(category, limit, from, callback);
     }
 }

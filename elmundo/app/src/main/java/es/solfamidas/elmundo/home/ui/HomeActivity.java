@@ -1,6 +1,5 @@
 package es.solfamidas.elmundo.home.ui;
 
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -10,15 +9,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
-import android.view.View;
 
 import com.astuetz.PagerSlidingTabStrip;
 
 import es.solfamidas.elmundo.R;
+import es.solfamidas.elmundo.common.datasource.ElMundoDataSourceImpl;
 import es.solfamidas.elmundo.common.framework.BaseToolBarActivity;
+import es.solfamidas.elmundo.home.presenter.HomePresenter;
+import es.solfamidas.elmundo.home.presenter.HomePresenterImpl;
 
-public class HomeActivity extends BaseToolBarActivity {
-
+public class HomeActivity
+        extends BaseToolBarActivity
+        implements HomeUi {
 
     private final Handler handler = new Handler();
 
@@ -29,6 +31,18 @@ public class HomeActivity extends BaseToolBarActivity {
 
     private Drawable oldBackground = null;
 
+    // Injected vars
+    private HomePresenter mPresenter;
+
+
+
+    @Override
+    public void injectModuleDependencies() {
+        mPresenter = new HomePresenterImpl(
+                this,
+                new ElMundoDataSourceImpl(this)
+        );
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +52,17 @@ public class HomeActivity extends BaseToolBarActivity {
 
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         pager = (ViewPager) findViewById(R.id.pager);
-        adapter = new ArticleFeedPagerAdapter(getSupportFragmentManager());
+        adapter = new ArticleFeedPagerAdapter(
+                getSupportFragmentManager(),
+                mPresenter);
 
-        final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources()
-                .getDisplayMetrics());
-
+        final int pageMargin = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                4,
+                getResources().getDisplayMetrics());
         pager.setPageMargin(pageMargin);
-
         pager.setAdapter(adapter);
-
+        pager.setOffscreenPageLimit(6);
         tabs.setViewPager(pager);
 
         changeColor(currentColor);
@@ -91,15 +107,12 @@ public class HomeActivity extends BaseToolBarActivity {
             LayerDrawable ld = new LayerDrawable(new Drawable[] { colorDrawable, bottomDrawable });
 
             if (oldBackground == null) {
-
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
                     ld.setCallback(drawableCallback);
                 } else {
                     getSupportActionBar().setBackgroundDrawable(ld);
                 }
-
             } else {
-
                 TransitionDrawable td = new TransitionDrawable(new Drawable[] { oldBackground, ld });
 
                 // workaround for broken ActionBarContainer drawable handling on
@@ -112,7 +125,6 @@ public class HomeActivity extends BaseToolBarActivity {
                 }
 
                 td.startTransition(200);
-
             }
 
             oldBackground = ld;
@@ -120,22 +132,8 @@ public class HomeActivity extends BaseToolBarActivity {
             // http://stackoverflow.com/questions/11002691/actionbar-setbackgrounddrawable-nulling-background-from-thread-handler
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayShowTitleEnabled(true);
-
         }
 
         currentColor = newColor;
-
-    }
-
-    public void onColorClicked(View v) {
-
-        int color = Color.parseColor(v.getTag().toString());
-        changeColor(color);
-
-    }
-
-    @Override
-    public void injectModuleDependencies() {
-
     }
 }

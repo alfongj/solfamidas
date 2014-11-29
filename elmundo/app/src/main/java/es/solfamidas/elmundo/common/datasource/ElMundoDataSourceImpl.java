@@ -1,11 +1,15 @@
 package es.solfamidas.elmundo.common.datasource;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -26,21 +30,14 @@ public class ElMundoDataSourceImpl implements ElMundoDataSource {
     private static final String TAG = ElMundoDataSourceImpl.class.getSimpleName();
 
     // Injected vars
-    private final Handler mHandler;
-    private final HttpClient mHttpClient;
+    private final Context mContext;
 
 
 
     public ElMundoDataSourceImpl(
-            Handler handler,
-            HttpClient httpClient
+            Context context
     ) {
-        mHandler = handler;
-        mHttpClient = httpClient;
-
-        if (!ThreadUtils.assertIsUiHandler(handler)) {
-            Log.e(TAG, "Handler should be attached to UI thread");
-        }
+        mContext = context;
     }
 
     @Override
@@ -49,35 +46,41 @@ public class ElMundoDataSourceImpl implements ElMundoDataSource {
             final int limit,
             final int from,
             final ArticlesCallback callback) {
-        Thread background = new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Gson gson = new Gson();
-                    String responseString;
-                    HttpGet httpget = new HttpGet(buildGetArticlesUrl(cat, limit, from));
-                    ResponseHandler<String> responseHandler = new BasicResponseHandler();
-                    responseString = mHttpClient.execute(httpget, responseHandler);
+        final String url = buildGetArticlesUrl(cat, limit, from);
+        try {
+            Ion.with(mContext)
+                    .load(url)
+                    .asJsonArray()
+                    .setCallback(new FutureCallback<JsonArray>() {
+                        @Override
+                        public void onCompleted(Exception e, JsonArray result) {
+                            if (!ThreadUtils.assertInUIThread()) {
+                                throw new RuntimeException("NOT IN UI THREAD MADAFAKA");
+                            }
 
-                    // Convert json into POJO
-                    Type listType = new TypeToken<List<Article>>(){}.getType();
-                    final List<Article> articleList = gson.fromJson(responseString, listType);
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            callback.onSuccess(articleList);
+                            if (e == null) {
+                                Type listType = new TypeToken<List<Article>>() {
+                                }.getType();
+                                final List<Article> articleList =
+                                        new Gson().fromJson(result, listType);
+                                if (articleList == null) {
+                                    callback.onError("Received empty article list for " +
+                                                    buildGetArticlesUrl(cat, limit, from));
+                                } else {
+                                    callback.onSuccess(articleList);
+                                }
+                            } else {
+                                Log.e(TAG, "Error connecting with server: " + e.getMessage());
+                                Log.e(TAG, "  When calling URL: " + url);
+                                callback.onError("Error connecting with server: " + e.getMessage());
+                            }
                         }
                     });
-                } catch (Throwable t) {
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            callback.onError("Error connecting with server");
-                        }
-                    });
-                }
-            }
-        });
-        background.start();
+        } catch (final Throwable t) {
+            Log.e(TAG, "Error connecting with server: " + t.getMessage());
+            Log.e(TAG, "  When calling URL: " + url);
+            callback.onError("Error connecting with server: " + t.getMessage());
+        }
     }
 
     @Override
@@ -108,8 +111,8 @@ public class ElMundoDataSourceImpl implements ElMundoDataSource {
      */
     private String getCategoryName(Category cat) {
         switch (cat) {
-            case ALBUMES:
-                return "albumes";
+            case MI_MUNDO:
+                return "espana"; // TODO Change
             case CIENCIA:
                 return  "ciencia";
             case ECONOMIA:

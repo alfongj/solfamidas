@@ -1,11 +1,7 @@
 package es.solfamidas.elmundo.main.ui;
 
 import android.os.Bundle;
-<<<<<<< HEAD
-import android.os.Handler;
-=======
 import android.support.v4.app.FragmentTransaction;
->>>>>>> master
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.Menu;
@@ -15,13 +11,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import es.solfamidas.elmundo.R;
-import es.solfamidas.elmundo.common.datasource.ElMundoDataSourceImpl;
 import es.solfamidas.elmundo.common.framework.BaseToolBarActivity;
 import es.solfamidas.elmundo.home.presenter.HomePresenter;
-import es.solfamidas.elmundo.home.presenter.HomePresenterImpl;
 import es.solfamidas.elmundo.main.ui.fragments.TestFragment;
 
 import static android.view.View.OnClickListener;
@@ -37,15 +30,11 @@ public class MainActivity
     private HomePresenter mPresenter;
 
 
+
     @Override
     public void injectModuleDependencies() {
-        mPresenter = new HomePresenterImpl(
-                this,
-                new ElMundoDataSourceImpl(
-                        new Handler(),
-                        new DefaultHttpClient()));
-    }
 
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
