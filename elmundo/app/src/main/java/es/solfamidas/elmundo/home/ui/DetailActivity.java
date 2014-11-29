@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -108,6 +109,7 @@ public class DetailActivity extends BaseToolBarActivity implements DetailUI, Scr
     public void renderArticle(Article mArticle) {
         mTitleTv.setText(mArticle.getTitle());
         mDescTv.setText(Html.fromHtml(mArticle.getDescription()));
+        mDescTv.setMovementMethod(LinkMovementMethod.getInstance());
         mAuthorTv.setText(mArticle.getAuthor());
         mDateTv.setText("Actualizado: " + mArticle.getDate());
 

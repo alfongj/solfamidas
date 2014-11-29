@@ -67,6 +67,7 @@
                 android:paddingBottom="8dp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textSize="15sp"
+                android:clickable="true"
                 android:fontFamily="sans-serif-thin"
                 android:id="@+id/articleDescTv" />
         </LinearLayout>
