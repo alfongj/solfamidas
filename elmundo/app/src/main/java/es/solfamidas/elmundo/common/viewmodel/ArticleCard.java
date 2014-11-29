@@ -1,6 +1,7 @@
 package es.solfamidas.elmundo.common.viewmodel;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -14,11 +15,13 @@ import it.gmariotti.cardslib.library.internal.Card;
 
 public class ArticleCard extends Card {
 
+    private static final String NO_IMAGE_URL =
+            "http://www.lucirfashion.com/blog/images/img_not_found.gif";
     protected TextView mTitle;
     protected TextView mDescription;
     protected ImageView mImage;
 
-    public String title, description, imgUrl;
+    public String title, mSummary, imgUrl;
 
     /**
      * Constructor with a custom inner layout
@@ -38,9 +41,9 @@ public class ArticleCard extends Card {
         init();
     }
 
-    public void setArticleContent(String title, String desc, String imgUrl) {
+    public void setArticleContent(String title, String summary, String imgUrl) {
         this.title = title;
-        this.description = desc;
+        mSummary = summary;
         this.imgUrl = imgUrl;
     }
 
@@ -73,10 +76,17 @@ public class ArticleCard extends Card {
         if (mTitle != null) {
             mTitle.setText(title);
         }
+
         if (mDescription != null) {
-            mDescription.setText(description);
+            mDescription.setText(mSummary);
         }
+
         if (mImage != null) {
+            
+            if (imgUrl == null || imgUrl.isEmpty()) {
+                imgUrl = NO_IMAGE_URL;
+            }
+            
             Picasso.with(getContext()).load(imgUrl).resize(800, 500).centerCrop().into(mImage);
         }
     }
